@@ -1,0 +1,542 @@
+[
+  {
+    "id": 1,
+    "name": "Diesel Concrete Mixer 280L",
+    "cat": "Construction Equipment",
+    "price": 25500,
+    "tag": "Popular",
+    "description": "Heavy-duty diesel concrete mixer suited to construction sites, building projects and contractor operations.",
+    "specs": [
+      "Fuel: Diesel",
+      "Capacity: 280L class",
+      "Use: Construction sites"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/diesel-concrete-mixer-280l.jpg",
+      "alt": "Diesel Concrete Mixer 280L"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Mortar Plan Mixer 500L",
+    "cat": "Construction Equipment",
+    "price": 31800,
+    "tag": "Contractor",
+    "description": "Large-capacity mortar mixer designed for efficient site batching and consistent mortar production.",
+    "specs": [
+      "Capacity: 500L class",
+      "Use: Mortar production",
+      "Type: Plan mixer"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/mortar-plan-mixer-500l.jpg",
+      "alt": "Mortar Plan Mixer 500L"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Manual Maxi Brick Machine",
+    "cat": "Construction Equipment",
+    "price": 2700,
+    "tag": "Value",
+    "description": "Manual brick-making machine for small contractors, builders and projects requiring on-site block production.",
+    "specs": [
+      "Operation: Manual",
+      "Application: Brick production",
+      "Use: Small to medium sites"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/manual-maxi-brick-machine.jpg",
+      "alt": "Manual Maxi Brick Machine"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Electric Paving Brick Machine",
+    "cat": "Construction Equipment",
+    "price": 7500,
+    "tag": "Popular",
+    "description": "Electric paving brick machine for repeatable production of paving and concrete products.",
+    "specs": [
+      "Power: Electric",
+      "Application: Paving products",
+      "Use: Production sites"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/electric-paving-brick-machine.jpg",
+      "alt": "Electric Paving Brick Machine"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Concrete Mixer 180kg / 280L",
+    "cat": "Construction Equipment",
+    "price": 25500,
+    "tag": "Contractor",
+    "description": "Compact concrete mixer configuration for dependable batching across construction and general site applications.",
+    "specs": [
+      "Type: Concrete mixer",
+      "Capacity: 280L class",
+      "Use: Building sites"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/concrete-mixer-180kg-280l.jpg",
+      "alt": "Concrete Mixer 180kg / 280L"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Aluminium Telescoping Ladder",
+    "cat": "Construction Equipment",
+    "price": 2999,
+    "tag": "Site",
+    "description": "Adjustable aluminium telescoping ladder for access, maintenance and general site work.",
+    "specs": [
+      "Material: Aluminium",
+      "Type: Telescoping",
+      "Use: Access & maintenance"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/aluminium-telescoping-ladder.jpg",
+      "alt": "Aluminium Telescoping Ladder"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Ecco 3.5kVA Hybrid Solar Kit",
+    "cat": "Solar & Batteries",
+    "price": 10099,
+    "tag": "Energy",
+    "description": "Hybrid solar kit for dependable backup and everyday energy applications.",
+    "specs": [
+      "System: Hybrid solar",
+      "Capacity: 3.5kVA class",
+      "Use: Backup & energy"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/ecco-3-5kva-hybrid-solar-kit.jpg",
+      "alt": "Ecco 3.5kVA Hybrid Solar Kit"
+    }
+  },
+  {
+    "id": 8,
+    "name": "Deye 5kW Solar Kit",
+    "cat": "Solar & Batteries",
+    "price": 22199,
+    "tag": "Popular",
+    "description": "Deye solar kit designed for residential, commercial and small-business energy systems.",
+    "specs": [
+      "Brand: Deye",
+      "Capacity: 5kW",
+      "Use: Solar energy systems"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/deye-5kw-solar-kit.jpg",
+      "alt": "Deye 5kW Solar Kit"
+    }
+  },
+  {
+    "id": 9,
+    "name": "Growatt 6kW Solar Kit",
+    "cat": "Solar & Batteries",
+    "price": 22999,
+    "tag": "Energy",
+    "description": "Growatt solar kit for efficient power generation and energy management.",
+    "specs": [
+      "Brand: Growatt",
+      "Capacity: 6kW",
+      "Use: Solar energy systems"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/growatt-6kw-solar-kit.jpg",
+      "alt": "Growatt 6kW Solar Kit"
+    }
+  },
+  {
+    "id": 10,
+    "name": "Litcore 5kWh Lithium Battery",
+    "cat": "Solar & Batteries",
+    "price": 12000,
+    "tag": "Energy",
+    "description": "Lithium battery storage solution for solar and backup-power applications.",
+    "specs": [
+      "Capacity: 5kWh",
+      "Battery: Lithium",
+      "Use: Energy storage"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/litcore-5kwh-lithium-battery.jpg",
+      "alt": "Litcore 5kWh Lithium Battery"
+    }
+  },
+  {
+    "id": 11,
+    "name": "SunSynk 8kW Solar Kit",
+    "cat": "Solar & Batteries",
+    "price": 74999,
+    "tag": "Premium",
+    "description": "High-capacity SunSynk solar kit for demanding energy and backup requirements.",
+    "specs": [
+      "Brand: SunSynk",
+      "Capacity: 8kW",
+      "Use: High-demand energy systems"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/sunsynk-8kw-solar-kit.jpg",
+      "alt": "SunSynk 8kW Solar Kit"
+    }
+  },
+  {
+    "id": 12,
+    "name": "20ft High Cube Container",
+    "cat": "Containers",
+    "price": 15999,
+    "tag": "Site",
+    "description": "20ft high-cube shipping container suitable for storage, logistics, site use and conversion projects.",
+    "specs": [
+      "Length: 20ft",
+      "Type: High Cube",
+      "Use: Storage & logistics"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/20ft-high-cube-container.jpg",
+      "alt": "20ft High Cube Container"
+    }
+  },
+  {
+    "id": 13,
+    "name": "Used 20ft / 6M Container",
+    "cat": "Containers",
+    "price": 11600,
+    "tag": "Value",
+    "description": "Used 20ft / 6M container for practical storage, transport and site applications.",
+    "specs": [
+      "Length: 20ft / 6M",
+      "Condition: Used",
+      "Use: Storage & site"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/used-20ft-6m-container.jpg",
+      "alt": "Used 20ft / 6M Container"
+    }
+  },
+  {
+    "id": 14,
+    "name": "10ft High Cube Container",
+    "cat": "Containers",
+    "price": 10200,
+    "tag": "Site",
+    "description": "Compact 10ft high-cube container for storage and space-constrained sites.",
+    "specs": [
+      "Length: 10ft",
+      "Type: High Cube",
+      "Use: Compact storage"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/10ft-high-cube-container.jpg",
+      "alt": "10ft High Cube Container"
+    }
+  },
+  {
+    "id": 15,
+    "name": "Converted Container Kiosk",
+    "cat": "Containers",
+    "price": 18500,
+    "tag": "Business",
+    "description": "Converted container kiosk suitable for retail, service, food and small-business applications.",
+    "specs": [
+      "Type: Converted kiosk",
+      "Use: Retail & services",
+      "Format: Container"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/converted-container-kiosk.jpg",
+      "alt": "Converted Container Kiosk"
+    }
+  },
+  {
+    "id": 16,
+    "name": "Container Office Unit",
+    "cat": "Containers",
+    "price": 18500,
+    "tag": "Business",
+    "description": "Container office unit providing practical, relocatable workspace for sites and projects.",
+    "specs": [
+      "Type: Container office",
+      "Use: Site workspace",
+      "Format: Relocatable"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/container-office-unit.jpg",
+      "alt": "Container Office Unit"
+    }
+  },
+  {
+    "id": 17,
+    "name": "1000L Water Trailer",
+    "cat": "Water Solutions",
+    "price": 18999,
+    "tag": "Water",
+    "description": "1000L water trailer for mobile water transport, site supply and agricultural applications.",
+    "specs": [
+      "Capacity: 1000L",
+      "Type: Water trailer",
+      "Use: Mobile water supply"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/1000l-water-trailer.jpg",
+      "alt": "1000L Water Trailer"
+    }
+  },
+  {
+    "id": 18,
+    "name": "1000L Water Storage Tank",
+    "cat": "Water Solutions",
+    "price": 3999,
+    "tag": "Storage",
+    "description": "1000L water storage tank for reliable on-site water storage and distribution.",
+    "specs": [
+      "Capacity: 1000L",
+      "Type: Storage tank",
+      "Use: Water storage"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/1000l-water-storage-tank.jpg",
+      "alt": "1000L Water Storage Tank"
+    }
+  },
+  {
+    "id": 19,
+    "name": "Industrial Water Pump",
+    "cat": "Water Solutions",
+    "price": 6499,
+    "tag": "Water",
+    "description": "Industrial water pump for water transfer and demanding site applications.",
+    "specs": [
+      "Type: Industrial pump",
+      "Application: Water transfer",
+      "Use: Site & utility"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/industrial-water-pump.jpg",
+      "alt": "Industrial Water Pump"
+    }
+  },
+  {
+    "id": 20,
+    "name": "Booster Pump",
+    "cat": "Water Solutions",
+    "price": 4599,
+    "tag": "Water",
+    "description": "Booster pump for improving water pressure across suitable residential, commercial and site systems.",
+    "specs": [
+      "Type: Booster pump",
+      "Application: Water pressure",
+      "Use: Suitable water systems"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/booster-pump.jpg",
+      "alt": "Booster Pump"
+    }
+  },
+  {
+    "id": 21,
+    "name": "Portable Toilet",
+    "cat": "Sanitation",
+    "price": 4999,
+    "tag": "Site",
+    "description": "Portable toilet solution for construction sites, events and temporary facilities.",
+    "specs": [
+      "Type: Portable toilet",
+      "Use: Temporary sanitation",
+      "Application: Sites & events"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/portable-toilet.jpg",
+      "alt": "Portable Toilet"
+    }
+  },
+  {
+    "id": 22,
+    "name": "Portable Flushing Toilet",
+    "cat": "Sanitation",
+    "price": 5999,
+    "tag": "Site",
+    "description": "Portable flushing toilet offering a more comfortable sanitation solution for temporary sites.",
+    "specs": [
+      "Type: Flushing toilet",
+      "Use: Temporary sanitation",
+      "Application: Sites & events"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/portable-flushing-toilet.jpg",
+      "alt": "Portable Flushing Toilet"
+    }
+  },
+  {
+    "id": 23,
+    "name": "Industrial Wheelie Bin",
+    "cat": "Industrial Supply",
+    "price": 1299,
+    "tag": "Supply",
+    "description": "Industrial wheelie bin for organised waste collection across commercial and site environments.",
+    "specs": [
+      "Type: Wheelie bin",
+      "Use: Waste collection",
+      "Application: Commercial & site"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/industrial-wheelie-bin.jpg",
+      "alt": "Industrial Wheelie Bin"
+    }
+  },
+  {
+    "id": 24,
+    "name": "IBC Storage Tank",
+    "cat": "Industrial Supply",
+    "price": 2499,
+    "tag": "Supply",
+    "description": "IBC storage tank for bulk liquid storage and practical industrial handling.",
+    "specs": [
+      "Type: IBC tank",
+      "Use: Bulk liquid storage",
+      "Application: Industrial supply"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/ibc-storage-tank.jpg",
+      "alt": "IBC Storage Tank"
+    }
+  },
+  {
+    "id": 25,
+    "name": "Plastic Storage Drum",
+    "cat": "Industrial Supply",
+    "price": 999,
+    "tag": "Supply",
+    "description": "Plastic storage drum for general liquid storage and industrial supply needs.",
+    "specs": [
+      "Material: Plastic",
+      "Type: Storage drum",
+      "Use: Liquid storage"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/plastic-storage-drum.jpg",
+      "alt": "Plastic Storage Drum"
+    }
+  },
+  {
+    "id": 26,
+    "name": "Steel Storage Drum",
+    "cat": "Industrial Supply",
+    "price": 1499,
+    "tag": "Supply",
+    "description": "Steel storage drum for robust storage and industrial handling applications.",
+    "specs": [
+      "Material: Steel",
+      "Type: Storage drum",
+      "Use: Industrial storage"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/steel-storage-drum.jpg",
+      "alt": "Steel Storage Drum"
+    }
+  },
+  {
+    "id": 27,
+    "name": "Diesel Transfer Pump",
+    "cat": "Fuel Equipment",
+    "price": 3499,
+    "tag": "Fuel",
+    "description": "Diesel transfer pump for controlled fuel transfer in suitable workshop, fleet and site environments.",
+    "specs": [
+      "Type: Diesel transfer pump",
+      "Use: Fuel transfer",
+      "Application: Fleet & site"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/diesel-transfer-pump.jpg",
+      "alt": "Diesel Transfer Pump"
+    }
+  },
+  {
+    "id": 28,
+    "name": "Diesel Transfer Pump Kit",
+    "cat": "Fuel Equipment",
+    "price": 4999,
+    "tag": "Fuel",
+    "description": "Complete diesel transfer pump kit for convenient fuel-transfer applications.",
+    "specs": [
+      "Type: Transfer pump kit",
+      "Use: Fuel transfer",
+      "Application: Workshop & site"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/diesel-transfer-pump-kit.jpg",
+      "alt": "Diesel Transfer Pump Kit"
+    }
+  },
+  {
+    "id": 29,
+    "name": "10 000L Water Bowser",
+    "cat": "Water Solutions",
+    "price": 49999,
+    "tag": "Project",
+    "description": "10,000L water bowser for large-volume water transport and project supply.",
+    "specs": [
+      "Capacity: 10,000L",
+      "Type: Water bowser",
+      "Use: Project water supply"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/10-000l-water-bowser.jpg",
+      "alt": "10 000L Water Bowser"
+    }
+  },
+  {
+    "id": 30,
+    "name": "Fire Fighting Water Unit",
+    "cat": "Water Solutions",
+    "price": 22999,
+    "tag": "Safety",
+    "description": "Fire-fighting water unit for emergency water supply and site safety applications.",
+    "specs": [
+      "Type: Fire-fighting water unit",
+      "Use: Emergency water supply",
+      "Application: Site safety"
+    ],
+    "availability": "Enquire for availability",
+    "image": {
+      "src": "assets/products/fire-fighting-water-unit.jpg",
+      "alt": "Fire Fighting Water Unit"
+    }
+  }
+]

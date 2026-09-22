@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" id="metaDescription" content="EquipPoint Construction product details.">
+  <title id="pageTitle">Product | EquipPoint Construction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="product.css">
+</head>
+<body>
+  <div class="topbar">Nationwide supply &nbsp;•&nbsp; Construction, industrial & infrastructure solutions</div>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="EquipPoint Construction home">
+      <span class="brand-mark">EP</span>
+      <span><strong>EquipPoint</strong><small>CONSTRUCTION</small></span>
+    </a>
+    <nav class="nav">
+      <a href="index.html#categories">Categories</a>
+      <a href="index.html#catalog">Products</a>
+      <a href="index.html#solutions">Solutions</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="back-link" href="index.html#catalog">← Catalog</a>
+      <button class="cart-btn" id="cartBtn">Cart <span id="cartCount">0</span></button>
+    </div>
+  </header>
+
+  <main>
+    <div class="product-breadcrumb"><a href="index.html">Home</a><span>/</span><a href="index.html#catalog">Products</a><span>/</span><strong id="crumbName">Product</strong></div>
+
+    <section class="product-detail">
+      <div class="product-visual">
+        <div class="visual-tag" id="productTag">FEATURED</div>
+        <div class="visual-code" id="visualCode">01</div>
+        <div class="visual-category" id="visualCategory">EQUIPMENT</div>
+      </div>
+
+      <div class="product-content">
+        <p class="eyebrow" id="productCategory">PRODUCT</p>
+        <h1 id="productName">Loading product…</h1>
+        <div class="product-price" id="productPrice"></div>
+        <p class="product-description" id="productDescription"></p>
+
+        <div class="availability"><span></span><strong id="availability">Enquire for availability</strong></div>
+
+        <div class="quantity-row">
+          <label for="quantity">Quantity</label>
+          <div class="quantity-control">
+            <button id="minus" type="button">−</button>
+            <input id="quantity" type="number" min="1" value="1">
+            <button id="plus" type="button">+</button>
+          </div>
+        </div>
+
+        <div class="product-actions">
+          <button class="btn btn-primary" id="addCart">Add to cart</button>
+          <a class="btn btn-outline-dark" id="quoteLink" href="index.html#contact">Request a quote</a>
+        </div>
+
+        <a class="whatsapp-btn" id="whatsappLink" target="_blank" rel="noopener">Enquire via WhatsApp →</a>
+
+        <div class="spec-box">
+          <p class="eyebrow">PRODUCT INFORMATION</p>
+          <div id="specs"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="related-section">
+      <div class="section-heading">
+        <div><p class="eyebrow">YOU MAY ALSO NEED</p><h2>Related products.</h2></div>
+        <a href="index.html#catalog" class="text-link">View full catalog →</a>
+      </div>
+      <div class="related-grid" id="relatedGrid"></div>
+    </section>
+  </main>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="drawer-head"><h2>Your cart</h2><button id="closeCart" aria-label="Close">×</button></div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-total"><strong>Total</strong><strong id="cartTotal">R0</strong></div>
+    <button class="btn btn-primary full" id="checkoutBtn">Continue to enquiry</button>
+  </aside>
+  <div class="drawer-backdrop" id="backdrop"></div>
+
+  <footer>
+    <div class="footer-brand"><strong>EquipPoint</strong><small>CONSTRUCTION</small></div>
+    <p>Equipment. Construction. Infrastructure.</p>
+    <p>© <span id="year"></span> EquipPoint Construction. All rights reserved.</p>
+  </footer>
+
+  <script src="product.js"></script>
+</body>
+</html>

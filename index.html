@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="EquipPoint Construction — construction equipment, industrial supply, water solutions, solar, containers and site products.">
+  <title>EquipPoint Construction | Equipment. Construction. Infrastructure.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="topbar">Nationwide supply &nbsp;•&nbsp; Construction, industrial & infrastructure solutions</div>
+
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="EquipPoint Construction home">
+      <span class="brand-mark">EP</span>
+      <span><strong>EquipPoint</strong><small>CONSTRUCTION</small></span>
+    </a>
+
+    <nav class="nav">
+      <a href="#categories">Categories</a>
+      <a href="#featured">Featured</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="searchBtn" aria-label="Search">⌕</button>
+      <button class="cart-btn" id="cartBtn">Cart <span id="cartCount">0</span></button>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">EQUIPMENT • CONSTRUCTION • INFRASTRUCTURE</p>
+        <h1>Built for the work<br><span>that moves South Africa.</span></h1>
+        <p class="hero-text">Source dependable equipment, site solutions and industrial products from one professional supplier.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#catalog">Shop equipment</a>
+          <a class="btn btn-outline" href="#contact">Request a quote</a>
+        </div>
+        <div class="trust-row">
+          <span>✓ Contractor-ready products</span>
+          <span>✓ Nationwide enquiries</span>
+          <span>✓ Bulk supply available</span>
+        </div>
+      </div>
+      <div class="hero-panel">
+        <div class="hero-panel-label">INDUSTRIAL SUPPLY</div>
+        <div class="hero-panel-number">01</div>
+        <p>Construction equipment, water, power, storage and site solutions.</p>
+      </div>
+    </section>
+
+    <section class="category-section" id="categories">
+      <div class="section-heading">
+        <div><p class="eyebrow">SHOP BY CATEGORY</p><h2>Everything for the jobsite.</h2></div>
+        <a href="#catalog" class="text-link">View all products →</a>
+      </div>
+      <div class="category-grid">
+        <button class="category-card" data-category="Construction Equipment"><span>01</span><h3>Construction<br>Equipment</h3><p>Mixers, brick machines & site equipment</p></button>
+        <button class="category-card" data-category="Solar & Batteries"><span>02</span><h3>Solar &<br>Batteries</h3><p>Power systems, inverters & storage</p></button>
+        <button class="category-card" data-category="Containers"><span>03</span><h3>Containers &<br>Structures</h3><p>Shipping, office & kiosk solutions</p></button>
+        <button class="category-card" data-category="Water Solutions"><span>04</span><h3>Water<br>Solutions</h3><p>Tanks, bowsers & pumps</p></button>
+        <button class="category-card" data-category="Sanitation"><span>05</span><h3>Sanitation &<br>Site Services</h3><p>Portable toilet & hygiene solutions</p></button>
+        <button class="category-card" data-category="Industrial Supply"><span>06</span><h3>Industrial<br>Supply</h3><p>Storage, drums, bins & essentials</p></button>
+      </div>
+    </section>
+
+    <section class="catalog-section" id="catalog">
+      <div class="section-heading">
+        <div><p class="eyebrow">PRODUCT CATALOG</p><h2>Featured equipment.</h2></div>
+        <div class="catalog-tools">
+          <label class="search-field"><span>⌕</span><input id="searchInput" placeholder="Search products..." autocomplete="off"></label>
+          <select id="categoryFilter" aria-label="Filter products">
+            <option value="All">All categories</option>
+            <option>Construction Equipment</option><option>Solar & Batteries</option><option>Containers</option>
+            <option>Water Solutions</option><option>Sanitation</option><option>Industrial Supply</option><option>Fuel Equipment</option>
+          </select>
+        </div>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section class="solutions" id="solutions">
+      <div class="solution-copy"><p class="eyebrow">BUILT AROUND YOUR PROJECT</p><h2>More than products.<br><span>Complete site solutions.</span></h2><p>From a single mixer to a full water, power or container setup, EquipPoint is structured around the needs of contractors, businesses and project teams.</p><a href="#contact" class="btn btn-light">Talk to our team</a></div>
+      <div class="solution-list">
+        <div><b>01</b><span><strong>Construction</strong><small>Equipment for building and civil projects.</small></span></div>
+        <div><b>02</b><span><strong>Power & Energy</strong><small>Solar, batteries and backup power.</small></span></div>
+        <div><b>03</b><span><strong>Water & Storage</strong><small>Tanks, pumps, bowsers and storage.</small></span></div>
+        <div><b>04</b><span><strong>Site Infrastructure</strong><small>Containers, sanitation and site essentials.</small></span></div>
+      </div>
+    </section>
+
+    <section class="quote" id="contact">
+      <div><p class="eyebrow">NEED A QUOTE?</p><h2>Tell us what your project needs.</h2><p>Send an enquiry for product availability, bulk quantities or a tailored supply request.</p></div>
+      <form id="quoteForm">
+        <input required name="name" placeholder="Your name">
+        <input required name="contact" placeholder="Phone or email">
+        <input required name="request" placeholder="What do you need?">
+        <button class="btn btn-primary" type="submit">Send enquiry</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand"><strong>EquipPoint</strong><small>CONSTRUCTION</small></div>
+    <p>Equipment. Construction. Infrastructure.</p>
+    <p>© <span id="year"></span> EquipPoint Construction. All rights reserved.</p>
+  </footer>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="drawer-head"><h2>Your cart</h2><button id="closeCart">×</button></div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-total"><span>Total</span><strong id="cartTotal">R0</strong></div>
+    <button class="btn btn-primary full" id="checkoutBtn">Request checkout</button>
+  </aside>
+  <div class="drawer-backdrop" id="backdrop"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
