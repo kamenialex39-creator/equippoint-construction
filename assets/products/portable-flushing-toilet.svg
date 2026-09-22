@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900">
+<rect width="1200" height="900" fill="#202020"/>
+<circle cx="1030" cy="780" r="330" fill="#d54b1f" opacity=".22"/>
+<text x="70" y="105" fill="#d54b1f" font-family="Arial" font-size="24" font-weight="700" letter-spacing="4">SANITATION</text>
+<text x="70" y="690" fill="#fff" font-family="Arial" font-size="44" font-weight="700">Portable Flushing Toilet</text>
+<text x="70" y="755" fill="#fff" opacity=".28" font-family="Arial" font-size="180" font-weight="700">22</text>
+<text x="70" y="835" fill="#aaa" font-family="Arial" font-size="18">PRODUCT IMAGE PLACEHOLDER</text>
+</svg>
