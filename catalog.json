@@ -15,7 +15,19 @@
     "image": {
       "src": "assets/products/diesel-concrete-mixer-280l.jpg",
       "alt": "Diesel Concrete Mixer 280L"
-    }
+    },
+    "shortDescription": "Heavy-duty diesel concrete mixer suited to construction sites, building projects and contractor operations.",
+    "applications": [
+      "Construction sites",
+      "Building projects",
+      "Civil works"
+    ],
+    "minimumOrder": 1,
+    "featured": true,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/diesel-concrete-mixer-280l.jpg"
+    ]
   },
   {
     "id": 2,
@@ -33,25 +45,49 @@
     "image": {
       "src": "assets/products/mortar-plan-mixer-500l.jpg",
       "alt": "Mortar Plan Mixer 500L"
-    }
+    },
+    "shortDescription": "Large-capacity mortar mixer designed for efficient site batching and consistent mortar production.",
+    "applications": [
+      "Construction sites",
+      "Building projects",
+      "Civil works"
+    ],
+    "minimumOrder": 1,
+    "featured": true,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/mortar-plan-mixer-500l.jpg"
+    ]
   },
   {
     "id": 3,
-    "name": "Manual Maxi Brick Machine",
+    "name": "Brick Machine 220V Interlocking Paver",
     "cat": "Construction Equipment",
     "price": 2700,
     "tag": "Value",
-    "description": "Manual brick-making machine for small contractors, builders and projects requiring on-site block production.",
+    "description": "Electric brick and paver machine designed for repeatable production of interlocking paving products and concrete blocks.",
     "specs": [
-      "Operation: Manual",
-      "Application: Brick production",
-      "Use: Small to medium sites"
+      "Power: 220V electric",
+      "Application: Interlocking pavers & blocks",
+      "Use: Construction & production sites"
     ],
     "availability": "Enquire for availability",
     "image": {
       "src": "assets/products/manual-maxi-brick-machine.jpg",
-      "alt": "Manual Maxi Brick Machine"
-    }
+      "alt": "Brick Machine 220V Interlocking Paver"
+    },
+    "shortDescription": "220V brick and paver machine for repeatable interlocking paver and block production.",
+    "applications": [
+      "Interlocking paver production",
+      "Construction sites",
+      "Civil projects"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/manual-maxi-brick-machine.jpg"
+    ]
   },
   {
     "id": 4,
@@ -69,7 +105,19 @@
     "image": {
       "src": "assets/products/electric-paving-brick-machine.jpg",
       "alt": "Electric Paving Brick Machine"
-    }
+    },
+    "shortDescription": "Electric paving brick machine for repeatable production of paving and concrete products.",
+    "applications": [
+      "Construction sites",
+      "Building projects",
+      "Civil works"
+    ],
+    "minimumOrder": 1,
+    "featured": true,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/electric-paving-brick-machine.jpg"
+    ]
   },
   {
     "id": 5,
@@ -87,7 +135,19 @@
     "image": {
       "src": "assets/products/concrete-mixer-180kg-280l.jpg",
       "alt": "Concrete Mixer 180kg / 280L"
-    }
+    },
+    "shortDescription": "Compact concrete mixer configuration for dependable batching across construction and general site applications.",
+    "applications": [
+      "Construction sites",
+      "Building projects",
+      "Civil works"
+    ],
+    "minimumOrder": 1,
+    "featured": true,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/concrete-mixer-180kg-280l.jpg"
+    ]
   },
   {
     "id": 6,
@@ -105,7 +165,19 @@
     "image": {
       "src": "assets/products/aluminium-telescoping-ladder.jpg",
       "alt": "Aluminium Telescoping Ladder"
-    }
+    },
+    "shortDescription": "Adjustable aluminium telescoping ladder for access, maintenance and general site work.",
+    "applications": [
+      "Construction sites",
+      "Building projects",
+      "Civil works"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/aluminium-telescoping-ladder.jpg"
+    ]
   },
   {
     "id": 7,
@@ -123,7 +195,19 @@
     "image": {
       "src": "assets/products/ecco-3-5kva-hybrid-solar-kit.jpg",
       "alt": "Ecco 3.5kVA Hybrid Solar Kit"
-    }
+    },
+    "shortDescription": "Hybrid solar kit for dependable backup and everyday energy applications.",
+    "applications": [
+      "Backup power",
+      "Commercial energy",
+      "Residential energy"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/ecco-3-5kva-hybrid-solar-kit.jpg"
+    ]
   },
   {
     "id": 8,
@@ -141,7 +225,19 @@
     "image": {
       "src": "assets/products/deye-5kw-solar-kit.jpg",
       "alt": "Deye 5kW Solar Kit"
-    }
+    },
+    "shortDescription": "Deye solar kit designed for residential, commercial and small-business energy systems.",
+    "applications": [
+      "Backup power",
+      "Commercial energy",
+      "Residential energy"
+    ],
+    "minimumOrder": 1,
+    "featured": true,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/deye-5kw-solar-kit.jpg"
+    ]
   },
   {
     "id": 9,
@@ -159,7 +255,19 @@
     "image": {
       "src": "assets/products/growatt-6kw-solar-kit.jpg",
       "alt": "Growatt 6kW Solar Kit"
-    }
+    },
+    "shortDescription": "Growatt solar kit for efficient power generation and energy management.",
+    "applications": [
+      "Backup power",
+      "Commercial energy",
+      "Residential energy"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/growatt-6kw-solar-kit.jpg"
+    ]
   },
   {
     "id": 10,
@@ -177,7 +285,19 @@
     "image": {
       "src": "assets/products/litcore-5kwh-lithium-battery.jpg",
       "alt": "Litcore 5kWh Lithium Battery"
-    }
+    },
+    "shortDescription": "Lithium battery storage solution for solar and backup-power applications.",
+    "applications": [
+      "Backup power",
+      "Commercial energy",
+      "Residential energy"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/litcore-5kwh-lithium-battery.jpg"
+    ]
   },
   {
     "id": 11,
@@ -195,7 +315,19 @@
     "image": {
       "src": "assets/products/sunsynk-8kw-solar-kit.jpg",
       "alt": "SunSynk 8kW Solar Kit"
-    }
+    },
+    "shortDescription": "High-capacity SunSynk solar kit for demanding energy and backup requirements.",
+    "applications": [
+      "Backup power",
+      "Commercial energy",
+      "Residential energy"
+    ],
+    "minimumOrder": 1,
+    "featured": true,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/sunsynk-8kw-solar-kit.jpg"
+    ]
   },
   {
     "id": 12,
@@ -213,7 +345,19 @@
     "image": {
       "src": "assets/products/20ft-high-cube-container.jpg",
       "alt": "20ft High Cube Container"
-    }
+    },
+    "shortDescription": "20ft high-cube shipping container suitable for storage, logistics, site use and conversion projects.",
+    "applications": [
+      "Construction sites",
+      "Storage",
+      "Business & workspace"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/20ft-high-cube-container.jpg"
+    ]
   },
   {
     "id": 13,
@@ -231,7 +375,19 @@
     "image": {
       "src": "assets/products/used-20ft-6m-container.jpg",
       "alt": "Used 20ft / 6M Container"
-    }
+    },
+    "shortDescription": "Used 20ft / 6M container for practical storage, transport and site applications.",
+    "applications": [
+      "Construction sites",
+      "Storage",
+      "Business & workspace"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/used-20ft-6m-container.jpg"
+    ]
   },
   {
     "id": 14,
@@ -249,7 +405,19 @@
     "image": {
       "src": "assets/products/10ft-high-cube-container.jpg",
       "alt": "10ft High Cube Container"
-    }
+    },
+    "shortDescription": "Compact 10ft high-cube container for storage and space-constrained sites.",
+    "applications": [
+      "Construction sites",
+      "Storage",
+      "Business & workspace"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/10ft-high-cube-container.jpg"
+    ]
   },
   {
     "id": 15,
@@ -267,7 +435,19 @@
     "image": {
       "src": "assets/products/converted-container-kiosk.jpg",
       "alt": "Converted Container Kiosk"
-    }
+    },
+    "shortDescription": "Converted container kiosk suitable for retail, service, food and small-business applications.",
+    "applications": [
+      "Construction sites",
+      "Storage",
+      "Business & workspace"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/converted-container-kiosk.jpg"
+    ]
   },
   {
     "id": 16,
@@ -285,7 +465,19 @@
     "image": {
       "src": "assets/products/container-office-unit.jpg",
       "alt": "Container Office Unit"
-    }
+    },
+    "shortDescription": "Container office unit providing practical, relocatable workspace for sites and projects.",
+    "applications": [
+      "Construction sites",
+      "Storage",
+      "Business & workspace"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/container-office-unit.jpg"
+    ]
   },
   {
     "id": 17,
@@ -303,7 +495,19 @@
     "image": {
       "src": "assets/products/1000l-water-trailer.jpg",
       "alt": "1000L Water Trailer"
-    }
+    },
+    "shortDescription": "1000L water trailer for mobile water transport, site supply and agricultural applications.",
+    "applications": [
+      "Construction sites",
+      "Agriculture",
+      "Industrial water supply"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/1000l-water-trailer.jpg"
+    ]
   },
   {
     "id": 18,
@@ -321,7 +525,19 @@
     "image": {
       "src": "assets/products/1000l-water-storage-tank.jpg",
       "alt": "1000L Water Storage Tank"
-    }
+    },
+    "shortDescription": "1000L water storage tank for reliable on-site water storage and distribution.",
+    "applications": [
+      "Construction sites",
+      "Agriculture",
+      "Industrial water supply"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/1000l-water-storage-tank.jpg"
+    ]
   },
   {
     "id": 19,
@@ -339,7 +555,19 @@
     "image": {
       "src": "assets/products/industrial-water-pump.jpg",
       "alt": "Industrial Water Pump"
-    }
+    },
+    "shortDescription": "Industrial water pump for water transfer and demanding site applications.",
+    "applications": [
+      "Construction sites",
+      "Agriculture",
+      "Industrial water supply"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/industrial-water-pump.jpg"
+    ]
   },
   {
     "id": 20,
@@ -357,7 +585,19 @@
     "image": {
       "src": "assets/products/booster-pump.jpg",
       "alt": "Booster Pump"
-    }
+    },
+    "shortDescription": "Booster pump for improving water pressure across suitable residential, commercial and site systems.",
+    "applications": [
+      "Construction sites",
+      "Agriculture",
+      "Industrial water supply"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/booster-pump.jpg"
+    ]
   },
   {
     "id": 21,
@@ -375,7 +615,19 @@
     "image": {
       "src": "assets/products/portable-toilet.jpg",
       "alt": "Portable Toilet"
-    }
+    },
+    "shortDescription": "Portable toilet solution for construction sites, events and temporary facilities.",
+    "applications": [
+      "Construction sites",
+      "Events",
+      "Temporary facilities"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/portable-toilet.jpg"
+    ]
   },
   {
     "id": 22,
@@ -393,7 +645,19 @@
     "image": {
       "src": "assets/products/portable-flushing-toilet.jpg",
       "alt": "Portable Flushing Toilet"
-    }
+    },
+    "shortDescription": "Portable flushing toilet offering a more comfortable sanitation solution for temporary sites.",
+    "applications": [
+      "Construction sites",
+      "Events",
+      "Temporary facilities"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/portable-flushing-toilet.jpg"
+    ]
   },
   {
     "id": 23,
@@ -411,7 +675,19 @@
     "image": {
       "src": "assets/products/industrial-wheelie-bin.jpg",
       "alt": "Industrial Wheelie Bin"
-    }
+    },
+    "shortDescription": "Industrial wheelie bin for organised waste collection across commercial and site environments.",
+    "applications": [
+      "Industrial sites",
+      "Commercial operations",
+      "Storage & handling"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/industrial-wheelie-bin.jpg"
+    ]
   },
   {
     "id": 24,
@@ -429,7 +705,19 @@
     "image": {
       "src": "assets/products/ibc-storage-tank.jpg",
       "alt": "IBC Storage Tank"
-    }
+    },
+    "shortDescription": "IBC storage tank for bulk liquid storage and practical industrial handling.",
+    "applications": [
+      "Industrial sites",
+      "Commercial operations",
+      "Storage & handling"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/ibc-storage-tank.jpg"
+    ]
   },
   {
     "id": 25,
@@ -447,7 +735,19 @@
     "image": {
       "src": "assets/products/plastic-storage-drum.jpg",
       "alt": "Plastic Storage Drum"
-    }
+    },
+    "shortDescription": "Plastic storage drum for general liquid storage and industrial supply needs.",
+    "applications": [
+      "Industrial sites",
+      "Commercial operations",
+      "Storage & handling"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/plastic-storage-drum.jpg"
+    ]
   },
   {
     "id": 26,
@@ -465,7 +765,19 @@
     "image": {
       "src": "assets/products/steel-storage-drum.jpg",
       "alt": "Steel Storage Drum"
-    }
+    },
+    "shortDescription": "Steel storage drum for robust storage and industrial handling applications.",
+    "applications": [
+      "Industrial sites",
+      "Commercial operations",
+      "Storage & handling"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/steel-storage-drum.jpg"
+    ]
   },
   {
     "id": 27,
@@ -483,7 +795,19 @@
     "image": {
       "src": "assets/products/diesel-transfer-pump.jpg",
       "alt": "Diesel Transfer Pump"
-    }
+    },
+    "shortDescription": "Diesel transfer pump for controlled fuel transfer in suitable workshop, fleet and site environments.",
+    "applications": [
+      "Workshops",
+      "Fleet operations",
+      "Construction sites"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/diesel-transfer-pump.jpg"
+    ]
   },
   {
     "id": 28,
@@ -501,7 +825,19 @@
     "image": {
       "src": "assets/products/diesel-transfer-pump-kit.jpg",
       "alt": "Diesel Transfer Pump Kit"
-    }
+    },
+    "shortDescription": "Complete diesel transfer pump kit for convenient fuel-transfer applications.",
+    "applications": [
+      "Workshops",
+      "Fleet operations",
+      "Construction sites"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/diesel-transfer-pump-kit.jpg"
+    ]
   },
   {
     "id": 29,
@@ -519,7 +855,19 @@
     "image": {
       "src": "assets/products/10-000l-water-bowser.jpg",
       "alt": "10 000L Water Bowser"
-    }
+    },
+    "shortDescription": "10,000L water bowser for large-volume water transport and project supply.",
+    "applications": [
+      "Construction sites",
+      "Agriculture",
+      "Industrial water supply"
+    ],
+    "minimumOrder": 1,
+    "featured": true,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/10-000l-water-bowser.jpg"
+    ]
   },
   {
     "id": 30,
@@ -537,6 +885,18 @@
     "image": {
       "src": "assets/products/fire-fighting-water-unit.jpg",
       "alt": "Fire Fighting Water Unit"
-    }
+    },
+    "shortDescription": "Fire-fighting water unit for emergency water supply and site safety applications.",
+    "applications": [
+      "Construction sites",
+      "Agriculture",
+      "Industrial water supply"
+    ],
+    "minimumOrder": 1,
+    "featured": false,
+    "quoteEnabled": true,
+    "gallery": [
+      "assets/products/fire-fighting-water-unit.jpg"
+    ]
   }
 ]

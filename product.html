@@ -27,7 +27,7 @@
     </nav>
     <div class="header-actions">
       <a class="back-link" href="index.html#catalog">← Catalog</a>
-      <button class="cart-btn" id="cartBtn">Cart <span id="cartCount">0</span></button>
+      <button class="cart-btn" id="cartBtn">Enquiry <span id="cartCount">0</span></button>
     </div>
   </header>
 
@@ -59,7 +59,7 @@
         </div>
 
         <div class="product-actions">
-          <button class="btn btn-primary" id="addCart">Add to cart</button>
+          <button class="btn btn-primary" id="addCart">Add to enquiry</button>
           <a class="btn btn-outline-dark" id="quoteLink" href="index.html#contact">Request a quote</a>
         </div>
 
@@ -82,10 +82,10 @@
   </main>
 
   <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
-    <div class="drawer-head"><h2>Your cart</h2><button id="closeCart" aria-label="Close">×</button></div>
+    <div class="drawer-head"><h2>Your enquiry</h2><button id="closeCart" aria-label="Close">×</button></div>
     <div class="cart-items" id="cartItems"></div>
     <div class="cart-total"><strong>Total</strong><strong id="cartTotal">R0</strong></div>
-    <button class="btn btn-primary full" id="checkoutBtn">Continue to enquiry</button>
+    <div class="drawer-note">Review selected products, then continue to the quote form.</div><button class="btn btn-primary full" id="checkoutBtn">Continue to quote</button>
   </aside>
   <div class="drawer-backdrop" id="backdrop"></div>
 
@@ -95,6 +95,6 @@
     <p>© <span id="year"></span> EquipPoint Construction. All rights reserved.</p>
   </footer>
 
-  <script src="product.js"></script>
+  <script src="config.js"></script><script src="product.js"></script>
 </body>
 </html>
