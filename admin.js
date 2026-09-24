@@ -9,6 +9,8 @@ let allProducts = [];
 let currentImages = [];
 let pendingFiles = [];
 let authSession = null;
+let allEnquiries = [];
+let selectedEnquiry = null;
 
 const $ = (id) => document.getElementById(id);
 const money = (n) => 'R' + Number(n || 0).toLocaleString('en-ZA');
@@ -55,9 +57,9 @@ async function signIn(email,password){
 }
 async function signOut(){try{if(authSession?.access_token) await authFetch('/auth/v1/logout',{method:'POST'});}catch{}clearSession();showLogin();}
 
-function boot(){if(!ensureConfig())return;authSession=readSession();if(authSession?.access_token){showApp();loadProducts();}else showLogin();}
+function boot(){if(!ensureConfig())return;authSession=readSession();if(authSession?.access_token){showApp();}else showLogin();}
 function showLogin(){show('loginView');hide('appView');}
-function showApp(){hide('loginView');show('appView');}
+function showApp(){hide('loginView');show('appView');loadProducts();loadEnquiries();}
 
 async function loadProducts(){
   try{
@@ -203,11 +205,43 @@ async function saveProduct(e){
   }catch(e){setStatus(e.message);}
 }
 
+async function loadEnquiries(){
+  try{
+    const res=await authFetch('/rest/v1/enquiries?select=*,enquiry_items(id,product_id,product_name,unit_price,quantity)&order=created_at.desc');
+    const data=await res.json().catch(()=>[]);
+    if(!res.ok) throw new Error(data.message||data.error_description||'Could not load enquiries.');
+    allEnquiries=Array.isArray(data)?data:[];
+    renderEnquirySummary();renderEnquiries();
+  }catch(error){
+    $('enquiryList').innerHTML=`<div class="empty-panel"><h3>Could not load enquiries</h3><p>${escapeHtml(error.message)}</p></div>`;
+  }
+}
+function statusClass(status){return `status-${String(status||'New').toLowerCase()}`;}
+function formatDate(value){try{return new Date(value).toLocaleString('en-ZA',{dateStyle:'medium',timeStyle:'short'});}catch{return value||'';}}
+function renderEnquirySummary(){
+  const counts={New:0,Contacted:0,Quoted:0,Won:0,Lost:0};allEnquiries.forEach(e=>{counts[e.status||'New']=(counts[e.status||'New']||0)+1;});
+  $('enquirySummary').innerHTML=[['Total',allEnquiries.length,''],...Object.entries(counts)].map(([label,count])=>`<div class="enquiry-stat"><strong>${count}</strong><span>${label}</span></div>`).join('');
+}
+function renderEnquiries(){
+  const q=($('enquirySearch').value||'').toLowerCase().trim(),status=$('enquiryStatusFilter').value;
+  const list=allEnquiries.filter(e=>(!status||(e.status||'New')===status)&&(!q||`${e.name||''} ${e.company||''} ${e.contact||''} ${e.location||''} ${e.request||''}`.toLowerCase().includes(q)));
+  $('enquiryList').innerHTML=list.length?list.map(e=>{const items=e.enquiry_items||[];const total=e.estimated_total??items.reduce((s,x)=>s+Number(x.unit_price||0)*Number(x.quantity||0),0);return `<div class="enquiry-row"><div><h3>${escapeHtml(e.name||'Unnamed enquiry')}${e.company?` · ${escapeHtml(e.company)}`:''}</h3><p>${escapeHtml(e.contact||'No contact')} · ${escapeHtml(e.location||'No location')} · ${formatDate(e.created_at)}</p><div class="enquiry-row-meta"><span class="enquiry-status ${statusClass(e.status)}">${escapeHtml(e.status||'New')}</span><span class="pill">${items.length} product${items.length===1?'':'s'}</span><span class="pill">${money(total)}</span></div></div><div class="enquiry-row-actions"><button onclick="openEnquiry(${e.id})">View enquiry</button></div></div>`;}).join(''):`<div class="empty-panel"><h3>No enquiries found</h3><p>New website quote requests will appear here automatically.</p></div>`;
+}
+function renderEnquiryDetail(e){
+  const items=e.enquiry_items||[];const total=e.estimated_total??items.reduce((s,x)=>s+Number(x.unit_price||0)*Number(x.quantity||0),0);
+  $('enquiryModalTitle').textContent=`Enquiry #${e.id}`;
+  $('enquiryDetail').innerHTML=`<div class="enquiry-contact"><div class="detail-card"><div class="label">Customer</div><div class="value">${escapeHtml(e.name||'—')}</div></div><div class="detail-card"><div class="label">Company</div><div class="value">${escapeHtml(e.company||'—')}</div></div><div class="detail-card"><div class="label">Contact</div><div class="value">${escapeHtml(e.contact||'—')}</div></div><div class="detail-card"><div class="label">Delivery location</div><div class="value">${escapeHtml(e.location||'—')}</div></div></div><div class="detail-card"><div class="label">Request</div><div class="value">${escapeHtml(e.request||'—')}</div></div><div class="detail-card"><div class="label">Products requested</div><div class="enquiry-items">${items.length?items.map(x=>`<div class="enquiry-item"><span>${escapeHtml(x.product_name||'Product')} × ${Number(x.quantity||0)}</span><strong>${money(Number(x.unit_price||0)*Number(x.quantity||0))}</strong></div>`).join(''):'<div class="value">No products attached.</div>'}<div class="enquiry-items-total">Estimated total: ${money(total)}</div></div></div><div class="detail-card"><div class="label">Received</div><div class="value">${formatDate(e.created_at)}</div></div>`;
+  $('enquiryStatus').value=e.status||'New';$('enquiryNotes').value=e.notes||'';
+}
+window.openEnquiry=(id)=>{const e=allEnquiries.find(x=>x.id===id);if(!e)return;selectedEnquiry=e;renderEnquiryDetail(e);show('enquiryModal');$('enquiryModal').setAttribute('aria-hidden','false');};
+function closeEnquiry(){hide('enquiryModal');$('enquiryModal').setAttribute('aria-hidden','true');selectedEnquiry=null;}
+async function saveEnquiry(){if(!selectedEnquiry)return;const btn=$('saveEnquiryBtn');btn.disabled=true;$('enquiryStatusMessage').textContent='Saving…';try{const payload={status:$('enquiryStatus').value,notes:$('enquiryNotes').value.trim()||null,updated_at:new Date().toISOString()};const res=await authFetch(`/rest/v1/enquiries?id=eq.${encodeURIComponent(selectedEnquiry.id)}`,{method:'PATCH',headers:{'Prefer':'return=representation'},body:JSON.stringify(payload)});const data=await res.json().catch(()=>[]);if(!res.ok)throw new Error(data.message||'Could not save enquiry.');Object.assign(selectedEnquiry,data[0]||payload);$('enquiryStatusMessage').textContent='Enquiry saved.';renderEnquirySummary();renderEnquiries();setTimeout(closeEnquiry,450);}catch(e){$('enquiryStatusMessage').textContent=e.message;}finally{btn.disabled=false;}}
 $('loginForm').addEventListener('submit',async e=>{e.preventDefault();setStatus('Signing in...','loginStatus');try{await signIn($('loginEmail').value.trim(),$('loginPassword').value);setStatus('','loginStatus');showApp();await loadProducts();}catch(error){setStatus(error.message,'loginStatus');}});
 $('signOutBtn').addEventListener('click',signOut);
 $('newProductBtn').addEventListener('click',()=>openModal());$('closeModal').addEventListener('click',closeModal);$('cancelModal').addEventListener('click',closeModal);$('productForm').addEventListener('submit',saveProduct);
 $('imageFiles').addEventListener('change',e=>{pendingFiles.push(...Array.from(e.target.files||[]));e.target.value='';renderImages();});
 $('name').addEventListener('input',()=>{if(!$('productId').value&&!$('slug').value)$('slug').value=slugify($('name').value);});
 $('productSearch').addEventListener('input',renderProducts);$('productCategory').addEventListener('change',renderProducts);
-document.querySelectorAll('.nav-item').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.view').forEach(x=>x.classList.remove('active-view'));btn.classList.add('active');$(btn.dataset.view).classList.add('active-view');$('pageTitle').textContent=btn.textContent;}));
+document.querySelectorAll('.nav-item').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.view').forEach(x=>x.classList.remove('active-view'));btn.classList.add('active');$(btn.dataset.view).classList.add('active-view');$('pageTitle').textContent=btn.textContent;if(btn.dataset.view==='enquiriesView')loadEnquiries();}));
+$('enquirySearch').addEventListener('input',renderEnquiries);$('enquiryStatusFilter').addEventListener('change',renderEnquiries);$('refreshEnquiriesBtn').addEventListener('click',loadEnquiries);$('closeEnquiryModal').addEventListener('click',closeEnquiry);$('cancelEnquiryModal').addEventListener('click',closeEnquiry);$('saveEnquiryBtn').addEventListener('click',saveEnquiry);
 boot();
