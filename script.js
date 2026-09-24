@@ -56,12 +56,37 @@ function enquiryText(){return cart.length?cart.map(x=>`• ${x.name} × ${x.qty}
 function prepareQuoteFromCart(){const field=document.getElementById("requestField");if(!field)return;const current=field.value.trim();if(!current||current===window.__lastEnquiryText){field.value=enquiryText();window.__lastEnquiryText=field.value;}}
 function buildMessage(data){return `Hi EquipPoint Construction,\n\nI'd like to request a quotation.\n\n${data.request}\n\nCustomer: ${data.name}${data.company?`\nCompany: ${data.company}`:""}${data.contact?`\nContact: ${data.contact}`:""}${data.location?`\nDelivery location: ${data.location}`:""}\n\nPlease confirm availability, lead time, delivery and pricing. Thank you.`;}
 function sendWhatsApp(message){const encoded=encodeURIComponent(message);if(whatsappNumber){const clean=whatsappNumber.replace(/\D/g,"");window.open(`https://wa.me/${clean}?text=${encoded}`,"_blank");return true;}try{navigator.clipboard.writeText(message);}catch(e){}return false;}
+async function saveEnquiryToSupabase(data){
+  if(!cfg.supabaseUrl||!cfg.supabasePublishableKey) return {ok:false,reason:"missing-config"};
+  const items=cart.map(x=>({product_id:x.id,product_name:x.name,unit_price:Number(x.price||0),quantity:Number(x.qty||1)}));
+  const total=items.reduce((sum,x)=>sum+x.unit_price*x.quantity,0);
+  try{
+    const res=await fetch(`${cfg.supabaseUrl.replace(/\/$/,"")}/rest/v1/rpc/create_enquiry`,{
+      method:"POST",
+      headers:{apikey:cfg.supabasePublishableKey,Authorization:`Bearer ${cfg.supabasePublishableKey}`,"Content-Type":"application/json",Accept:"application/json"},
+      body:JSON.stringify({
+        p_name:data.name,
+        p_company:data.company||null,
+        p_contact:data.contact||null,
+        p_location:data.location||null,
+        p_request:data.request||null,
+        p_estimated_total:total,
+        p_items:items
+      })
+    });
+    if(!res.ok){const err=await res.text();return {ok:false,reason:err||`HTTP ${res.status}`};}
+    const createdId=await res.json().catch(()=>null);
+    return {ok:true,id:typeof createdId==="number"?createdId:null};
+  }catch(error){return {ok:false,reason:error.message||"Network error"};}
+}
+
+
 function openCart(){document.getElementById("cartDrawer").classList.add("open");document.getElementById("cartDrawer").setAttribute("aria-hidden","false");document.getElementById("backdrop").classList.add("show");}
 function closeCart(){document.getElementById("cartDrawer").classList.remove("open");document.getElementById("cartDrawer").setAttribute("aria-hidden","true");document.getElementById("backdrop").classList.remove("show");}
 document.getElementById("cartBtn").onclick=openCart;document.getElementById("closeCart").onclick=closeCart;document.getElementById("backdrop").onclick=closeCart;
 document.getElementById("searchBtn").onclick=()=>{document.getElementById("catalog").scrollIntoView({behavior:"smooth"});setTimeout(()=>search.focus(),350)};
 filter.onchange=render;search.oninput=render;document.querySelectorAll(".category-card").forEach(b=>b.onclick=()=>{filter.value=b.dataset.category;render();document.getElementById("catalog").scrollIntoView({behavior:"smooth"})});
 document.getElementById("checkoutBtn").onclick=()=>{closeCart();document.getElementById("contact").scrollIntoView({behavior:"smooth"});prepareQuoteFromCart();setTimeout(()=>document.getElementById("requestField").focus(),500);};
-document.getElementById("quoteForm").onsubmit=e=>{e.preventDefault();const f=e.target;const data={name:f.name.value.trim(),company:f.company.value.trim(),contact:f.contact.value.trim(),location:f.location.value.trim(),request:f.request.value.trim()};const message=buildMessage(data);const sent=sendWhatsApp(message);const status=document.getElementById("formStatus");status.textContent=sent?"WhatsApp opened with your enquiry ready to send.":"Your enquiry message was copied. Add the EquipPoint WhatsApp number in config.js to open the chat directly.";localStorage.setItem("equipPointLastEnquiry",JSON.stringify({...data,message,products:cart,createdAt:new Date().toISOString()}));if(sent)f.reset();};
+document.getElementById("quoteForm").onsubmit=async e=>{e.preventDefault();const f=e.target;const data={name:f.name.value.trim(),company:f.company.value.trim(),contact:f.contact.value.trim(),location:f.location.value.trim(),request:f.request.value.trim()};const status=document.getElementById("formStatus");if(!data.name||!data.request){status.textContent="Please complete your name and project requirements.";return;}status.textContent="Submitting your enquiry…";const crm=await saveEnquiryToSupabase(data);const message=buildMessage(data);const sent=whatsappNumber?sendWhatsApp(message):false;if(crm.ok){status.textContent=sent?"Enquiry submitted successfully. WhatsApp opened with your enquiry ready to send.":"Enquiry submitted successfully. Our team can now view your request in the EquipPoint admin dashboard.";localStorage.setItem("equipPointLastEnquiry",JSON.stringify({...data,message,products:cart,createdAt:new Date().toISOString(),crmId:crm.id||null}));cart=[];saveCart();prepareQuoteFromCart();f.reset();}else{status.textContent="We couldn't submit the enquiry right now. Please try again.";console.warn("CRM enquiry save failed:",crm.reason);}};
 document.getElementById("year").textContent=new Date().getFullYear();
 loadCatalog();
