@@ -4,9 +4,43 @@ const money=n=>"R"+Number(n||0).toLocaleString("en-ZA");
 const grid=document.getElementById("productGrid");
 const filter=document.getElementById("categoryFilter");
 const search=document.getElementById("searchInput");
-const whatsappNumber=(window.EQUIPPOINT_CONFIG&&window.EQUIPPOINT_CONFIG.whatsappNumber)||"";
+const cfg=window.EQUIPPOINT_CONFIG||{};
+const whatsappNumber=cfg.whatsappNumber||"";
 
-async function loadCatalog(){try{const res=await fetch("catalog.json");products=await res.json();}catch(e){products=[];}render();updateCart();prepareQuoteFromCart();}
+function normalizeProduct(p){
+  const images=(p.product_images||[]).slice().sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));
+  const primary=images[0];
+  const specs=p.specifications&&typeof p.specifications==="object"&&!Array.isArray(p.specifications)
+    ? Object.entries(p.specifications).map(([k,v])=>`${k}: ${v}`)
+    : Array.isArray(p.specifications)?p.specifications:[];
+  return {
+    id:p.id,name:p.name,price:Number(p.price||0),cat:p.category||"Industrial Supply",tag:p.tag||"Supply",
+    shortDescription:p.short_description||"",description:p.description||p.short_description||"",
+    availability:p.availability||"Enquire for availability",minimumOrder:p.minimum_order||null,
+    featured:!!p.featured,quoteEnabled:p.quote_enabled!==false,brand:p.brand||"",mpn:p.mpn||"",gtin:p.gtin||"",
+    googleProductCategory:p.google_product_category||"",seoTitle:p.seo_title||"",seoDescription:p.seo_description||"",
+    applications:Array.isArray(p.applications)?p.applications:[],specs,image:primary?{src:primary.image_url,alt:primary.alt_text||p.name}:null
+  };
+}
+
+async function loadFromSupabase(){
+  if(!cfg.supabaseUrl||!cfg.supabasePublishableKey) throw new Error("Supabase configuration is missing.");
+  const endpoint=`${cfg.supabaseUrl}/rest/v1/products?select=*,product_images(id,image_url,alt_text,sort_order)&order=created_at.desc`;
+  const res=await fetch(endpoint,{cache:"no-store",headers:{apikey:cfg.supabasePublishableKey,Authorization:`Bearer ${cfg.supabasePublishableKey}`,Accept:"application/json"}});
+  if(!res.ok) throw new Error(`Supabase request failed (${res.status}).`);
+  const data=await res.json();
+  return Array.isArray(data)?data.map(normalizeProduct):[];
+}
+
+async function loadCatalog(){
+  try{products=await loadFromSupabase();}
+  catch(e){
+    console.warn("Supabase catalog unavailable; using local fallback.",e);
+    try{const res=await fetch("catalog.json",{cache:"no-store"});products=(await res.json())||[];}
+    catch(f){products=[];}
+  }
+  render();updateCart();prepareQuoteFromCart();
+}
 function safeImg(src){return src||"assets/products/product-placeholder.svg";}
 function render(){
  const q=(search.value||"").toLowerCase().trim(); const cat=filter.value;
