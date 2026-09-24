@@ -48,9 +48,37 @@
       </section>
 
       <section id="enquiriesView" class="view">
-        <div class="empty-panel"><h3>Enquiries</h3><p>The enquiry pipeline will be connected in the next CMS phase.</p></div>
+        <div class="toolbar enquiry-toolbar">
+          <input id="enquirySearch" placeholder="Search enquiries..." autocomplete="off">
+          <select id="enquiryStatusFilter">
+            <option value="">All statuses</option>
+            <option value="New">New</option>
+            <option value="Contacted">Contacted</option>
+            <option value="Quoted">Quoted</option>
+            <option value="Won">Won</option>
+            <option value="Lost">Lost</option>
+          </select>
+          <button class="secondary" id="refreshEnquiriesBtn" type="button">Refresh</button>
+        </div>
+        <div class="enquiry-summary" id="enquirySummary"></div>
+        <div id="enquiryList" class="enquiry-list"></div>
       </section>
     </main>
+  </div>
+
+  <div id="enquiryModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-card large enquiry-modal-card">
+      <div class="modal-head"><div><p class="eyebrow">SALES ENQUIRY</p><h2 id="enquiryModalTitle">Enquiry</h2></div><button class="icon" id="closeEnquiryModal" type="button">×</button></div>
+      <div id="enquiryDetail" class="enquiry-detail"></div>
+      <div class="enquiry-actions-panel">
+        <label>Status<select id="enquiryStatus">
+          <option value="New">New</option><option value="Contacted">Contacted</option><option value="Quoted">Quoted</option><option value="Won">Won</option><option value="Lost">Lost</option>
+        </select></label>
+        <label>Internal notes<textarea id="enquiryNotes" rows="5" placeholder="Add internal sales notes..."></textarea></label>
+        <p id="enquiryStatusMessage" class="status"></p>
+        <div class="modal-actions"><button type="button" class="secondary" id="cancelEnquiryModal">Close</button><button type="button" class="primary" id="saveEnquiryBtn">Save enquiry</button></div>
+      </div>
+    </div>
   </div>
 
   <div id="productModal" class="modal hidden" aria-hidden="true">
