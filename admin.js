@@ -20,20 +20,11 @@ function show(id){$(id).classList.remove('hidden');}
 function hide(id){$(id).classList.add('hidden');}
 
 function ensureConfig(){
-  if(!SUPABASE_URL || !SUPABASE_KEY){
-    setStatus('CMS configuration is missing. Check config.js.','loginStatus');
-    return false;
-  }
+  if(!SUPABASE_URL || !SUPABASE_KEY){setStatus('CMS configuration is missing. Check config.js.','loginStatus');return false;}
   return true;
 }
-
-function saveSession(session){
-  authSession=session;
-  localStorage.setItem('equipPointAdminSession', JSON.stringify(session));
-}
-function readSession(){
-  try{return JSON.parse(localStorage.getItem('equipPointAdminSession')||'null');}catch{return null;}
-}
+function saveSession(session){authSession=session;localStorage.setItem('equipPointAdminSession',JSON.stringify(session));}
+function readSession(){try{return JSON.parse(localStorage.getItem('equipPointAdminSession')||'null');}catch{return null;}}
 function clearSession(){authSession=null;localStorage.removeItem('equipPointAdminSession');}
 
 async function authFetch(path, options={}){
@@ -41,52 +32,30 @@ async function authFetch(path, options={}){
   const headers=new Headers(options.headers||{});
   headers.set('apikey',SUPABASE_KEY);
   headers.set('Authorization',`Bearer ${authSession.access_token}`);
-  if(options.body && !(options.body instanceof FormData)) headers.set('Content-Type','application/json');
+  if(options.body && !(options.body instanceof FormData) && !headers.has('Content-Type')) headers.set('Content-Type','application/json');
   let res=await fetch(`${SUPABASE_URL}${path}`, {...options,headers});
   if(res.status===401 && authSession.refresh_token){
     const refreshed=await refreshSession();
-    if(refreshed){
-      headers.set('Authorization',`Bearer ${authSession.access_token}`);
-      res=await fetch(`${SUPABASE_URL}${path}`, {...options,headers});
-    }
+    if(refreshed){headers.set('Authorization',`Bearer ${authSession.access_token}`);res=await fetch(`${SUPABASE_URL}${path}`, {...options,headers});}
   }
   return res;
 }
-
 async function refreshSession(){
   try{
-    const res=await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=refresh_token`,{
-      method:'POST',headers:{'apikey':SUPABASE_KEY,'Content-Type':'application/json'},
-      body:JSON.stringify({refresh_token:authSession.refresh_token})
-    });
+    const res=await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=refresh_token`,{method:'POST',headers:{'apikey':SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:authSession.refresh_token})});
     if(!res.ok){clearSession();return false;}
-    const data=await res.json();
-    saveSession({...authSession,...data});
-    return true;
+    const data=await res.json();saveSession({...authSession,...data});return true;
   }catch{clearSession();return false;}
 }
-
 async function signIn(email,password){
-  const res=await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`,{
-    method:'POST',headers:{'apikey':SUPABASE_KEY,'Content-Type':'application/json'},
-    body:JSON.stringify({email,password})
-  });
+  const res=await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`,{method:'POST',headers:{'apikey':SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({email,password})});
   const data=await res.json().catch(()=>({}));
   if(!res.ok) throw new Error(data.error_description||data.msg||data.message||'Invalid login credentials.');
-  saveSession(data);
-  return data;
+  saveSession(data);return data;
 }
+async function signOut(){try{if(authSession?.access_token) await authFetch('/auth/v1/logout',{method:'POST'});}catch{}clearSession();showLogin();}
 
-async function signOut(){
-  try{if(authSession?.access_token) await authFetch('/auth/v1/logout',{method:'POST'});}catch{}
-  clearSession();showLogin();
-}
-
-function boot(){
-  if(!ensureConfig()) return;
-  authSession=readSession();
-  if(authSession?.access_token){showApp();loadProducts();}else showLogin();
-}
+function boot(){if(!ensureConfig())return;authSession=readSession();if(authSession?.access_token){showApp();loadProducts();}else showLogin();}
 function showLogin(){show('loginView');hide('appView');}
 function showApp(){hide('loginView');show('appView');}
 
@@ -106,8 +75,9 @@ function renderProducts(){
   const q=$('productSearch').value.toLowerCase().trim(),cat=$('productCategory').value;
   const list=allProducts.filter(p=>(!cat||p.category===cat)&&(!q||`${p.name} ${p.category} ${p.brand||''}`.toLowerCase().includes(q)));
   $('productList').innerHTML=list.length?list.map(p=>{
-    const img=(p.product_images||[]).sort((a,b)=>(a.sort_order||0)-(b.sort_order||0))[0]?.image_url;
-    return `<div class="product-row"><div class="thumb">${img?`<img src="${escapeHtml(img)}" alt="">`:''}</div><div><h3>${escapeHtml(p.name)}</h3><p>${escapeHtml(p.category||'')} · ${money(p.price)}</p><div class="product-meta">${p.featured?'<span class="pill">Featured</span>':''}<span class="pill">${escapeHtml(p.availability||'Enquire')}</span></div></div><div class="row-actions"><button onclick="editProduct(${p.id})">Edit</button><button onclick="deleteProduct(${p.id})">Delete</button></div></div>`;
+    const images=(p.product_images||[]).sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));
+    const img=images[0]?.image_url;
+    return `<div class="product-row"><div class="thumb">${img?`<img src="${escapeHtml(img)}" alt="">`:''}</div><div><h3>${escapeHtml(p.name)}</h3><p>${escapeHtml(p.category||'')} · ${money(p.price)}</p><div class="product-meta">${p.featured?'<span class="pill">Featured</span>':''}<span class="pill">${images.length} image${images.length===1?'':'s'}</span><span class="pill">${escapeHtml(p.availability||'Enquire')}</span></div></div><div class="row-actions"><button onclick="editProduct(${p.id})">Edit</button><button onclick="deleteProduct(${p.id})">Delete</button></div></div>`;
   }).join(''):`<div class="empty-panel"><h3>No products yet</h3><p>Add your first product using the button above.</p></div>`;
 }
 
@@ -120,19 +90,94 @@ function openModal(product=null){
     $('modalTitle').textContent='Edit product';$('productId').value=product.id;$('name').value=product.name||'';$('slug').value=product.slug||'';$('category').value=product.category||CATEGORIES[0];$('price').value=product.price??'';$('tag').value=product.tag||'';$('availability').value=product.availability||'';$('minimumOrder').value=product.minimum_order??'';$('brand').value=product.brand||'';$('mpn').value=product.mpn||'';$('gtin').value=product.gtin||'';$('googleProductCategory').value=product.google_product_category||'';$('shortDescription').value=product.short_description||'';$('description').value=product.description||'';$('seoTitle').value=product.seo_title||'';$('seoDescription').value=product.seo_description||'';$('featured').checked=!!product.featured;$('quoteEnabled').checked=product.quote_enabled!==false;
     $('specifications').value=product.specifications&&typeof product.specifications==='object'?Object.entries(product.specifications).map(([k,v])=>`${k}: ${v}`).join('\n'):'';
     $('applications').value=Array.isArray(product.applications)?product.applications.join('\n'):'';
-    currentImages=(product.product_images||[]).sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));renderImages();
+    currentImages=(product.product_images||[]).slice().sort((a,b)=>(a.sort_order||0)-(b.sort_order||0));renderImages();
   }
   show('productModal');$('productModal').setAttribute('aria-hidden','false');
 }
 function closeModal(){hide('productModal');$('productModal').setAttribute('aria-hidden','true');}
 function parseSpecs(text){const obj={};String(text||'').split('\n').map(x=>x.trim()).filter(Boolean).forEach(line=>{const i=line.indexOf(':');if(i>0)obj[line.slice(0,i).trim()]=line.slice(i+1).trim();});return obj;}
+
 function renderImages(){
-  const existing=currentImages.map((im,i)=>`<div class="image-item"><img src="${escapeHtml(im.image_url)}" alt="${escapeHtml(im.alt_text||'')}"><button type="button" onclick="removeExistingImage(${im.id})">×</button>${i===0?'<span class="primary-badge">PRIMARY</span>':''}</div>`).join('');
-  const pending=pendingFiles.map((f,i)=>`<div class="image-item"><img src="${URL.createObjectURL(f)}" alt=""><button type="button" onclick="removePending(${i})">×</button><span class="primary-badge">NEW</span></div>`).join('');
+  const existing=currentImages.map((im,i)=>`
+    <div class="image-item ${i===0?'is-primary':''}">
+      <img src="${escapeHtml(im.image_url)}" alt="${escapeHtml(im.alt_text||'')}" loading="lazy">
+      <div class="image-controls">
+        <button type="button" title="Move left" aria-label="Move image left" onclick="moveExistingImage(${im.id},-1)" ${i===0?'disabled':''}>‹</button>
+        <button type="button" title="Move right" aria-label="Move image right" onclick="moveExistingImage(${im.id},1)" ${i===currentImages.length-1?'disabled':''}>›</button>
+        <button type="button" title="Make primary" aria-label="Make primary" class="primary-control" onclick="makePrimary(${im.id})" ${i===0?'disabled':''}>★</button>
+        <button type="button" title="Delete image" aria-label="Delete image" class="delete-control" onclick="removeExistingImage(${im.id})">×</button>
+      </div>
+      ${i===0?'<span class="primary-badge">PRIMARY</span>':''}
+    </div>`).join('');
+  const pending=pendingFiles.map((f,i)=>`
+    <div class="image-item pending-image">
+      <img src="${URL.createObjectURL(f)}" alt="" loading="lazy">
+      <div class="image-controls">
+        <button type="button" title="Move left" aria-label="Move pending image left" onclick="movePending(${i},-1)" ${i===0?'disabled':''}>‹</button>
+        <button type="button" title="Move right" aria-label="Move pending image right" onclick="movePending(${i},1)" ${i===pendingFiles.length-1?'disabled':''}>›</button>
+        <button type="button" title="Remove image" aria-label="Remove pending image" class="delete-control" onclick="removePending(${i})">×</button>
+      </div>
+      <span class="primary-badge">NEW${i===0?' · FIRST':''}</span>
+    </div>`).join('');
   $('imageList').innerHTML=existing+pending;
 }
+
+async function persistImageOrder(){
+  if(!currentImages.length)return true;
+  setStatus('Saving image order...');
+  try{
+    for(let i=0;i<currentImages.length;i++){
+      const im=currentImages[i];
+      if(Number(im.sort_order)===i)continue;
+      const res=await authFetch(`/rest/v1/product_images?id=eq.${encodeURIComponent(im.id)}`,{method:'PATCH',headers:{'Prefer':'return=minimal'},body:JSON.stringify({sort_order:i})});
+      if(!res.ok){const d=await res.json().catch(()=>({}));throw new Error(d.message||'Could not save image order.');}
+      im.sort_order=i;
+    }
+    renderImages();setStatus('Image order saved.','formStatus',true);return true;
+  }catch(e){setStatus(e.message);return false;}
+}
+window.moveExistingImage=async(id,direction)=>{
+  const index=currentImages.findIndex(x=>x.id===id);if(index<0)return;
+  const next=index+direction;if(next<0||next>=currentImages.length)return;
+  [currentImages[index],currentImages[next]]=[currentImages[next],currentImages[index]];
+  renderImages();await persistImageOrder();
+};
+window.makePrimary=async(id)=>{
+  const index=currentImages.findIndex(x=>x.id===id);if(index<0||index===0)return;
+  const [item]=currentImages.splice(index,1);currentImages.unshift(item);renderImages();await persistImageOrder();
+};
+window.movePending=(index,direction)=>{
+  const next=index+direction;if(next<0||next>=pendingFiles.length)return;
+  [pendingFiles[index],pendingFiles[next]]=[pendingFiles[next],pendingFiles[index]];renderImages();
+};
 window.removePending=(i)=>{pendingFiles.splice(i,1);renderImages();};
-window.removeExistingImage=async(id)=>{const im=currentImages.find(x=>x.id===id);if(!im)return;setStatus('Removing image...');try{const res=await authFetch(`/rest/v1/product_images?id=eq.${encodeURIComponent(id)}`,{method:'DELETE'});if(!res.ok){const d=await res.json().catch(()=>({}));throw new Error(d.message||'Could not remove image.');}currentImages=currentImages.filter(x=>x.id!==id);renderImages();setStatus('Image removed.','formStatus',true);}catch(e){setStatus(e.message);}};
+
+function storagePathFromUrl(url){
+  const marker='/storage/v1/object/public/product-images/';
+  const index=String(url||'').indexOf(marker);if(index<0)return null;
+  return String(url).slice(index+marker.length).split('/').map(decodeURIComponent).join('/');
+}
+async function deleteStorageFile(url){
+  const path=storagePathFromUrl(url);if(!path)return true;
+  const encoded=path.split('/').map(encodeURIComponent).join('/');
+  const res=await authFetch(`/storage/v1/object/product-images/${encoded}`,{method:'DELETE'});
+  return res.ok || res.status===404;
+}
+window.removeExistingImage=async(id)=>{
+  const im=currentImages.find(x=>x.id===id);if(!im)return;
+  if(!confirm('Delete this product image?'))return;
+  setStatus('Deleting image...');
+  try{
+    const storageOk=await deleteStorageFile(im.image_url);
+    if(!storageOk)throw new Error('Could not delete the image file from storage.');
+    const res=await authFetch(`/rest/v1/product_images?id=eq.${encodeURIComponent(id)}`,{method:'DELETE'});
+    if(!res.ok){const d=await res.json().catch(()=>({}));throw new Error(d.message||'Could not remove image record.');}
+    currentImages=currentImages.filter(x=>x.id!==id);
+    for(let i=0;i<currentImages.length;i++)currentImages[i].sort_order=i;
+    await persistImageOrder();
+    setStatus('Image deleted.','formStatus',true);
+  }catch(e){setStatus(e.message);}
+};
 window.editProduct=(id)=>{const p=allProducts.find(x=>x.id===id);if(p)openModal(p);};
 window.deleteProduct=async(id)=>{const p=allProducts.find(x=>x.id===id);if(!p||!confirm(`Delete “${p.name}”?`))return;try{const res=await authFetch(`/rest/v1/products?id=eq.${encodeURIComponent(id)}`,{method:'DELETE'});if(!res.ok){const d=await res.json().catch(()=>({}));throw new Error(d.message||'Could not delete product.');}await loadProducts();}catch(e){alert(e.message);}};
 
@@ -143,11 +188,8 @@ async function saveProduct(e){
     const name=$('name').value.trim();
     const payload={name,slug:$('slug').value.trim()||slugify(name),category:$('category').value,price:$('price').value?Number($('price').value):null,tag:$('tag').value.trim()||null,short_description:$('shortDescription').value.trim()||null,description:$('description').value.trim()||null,specifications:parseSpecs($('specifications').value),applications:$('applications').value.split('\n').map(x=>x.trim()).filter(Boolean),availability:$('availability').value.trim()||null,minimum_order:$('minimumOrder').value?Number($('minimumOrder').value):null,featured:$('featured').checked,quote_enabled:$('quoteEnabled').checked,brand:$('brand').value.trim()||null,mpn:$('mpn').value.trim()||null,gtin:$('gtin').value.trim()||null,google_product_category:$('googleProductCategory').value.trim()||null,seo_title:$('seoTitle').value.trim()||null,seo_description:$('seoDescription').value.trim()||null,updated_at:new Date().toISOString()};
     let product;
-    if(id){
-      const res=await authFetch(`/rest/v1/products?id=eq.${encodeURIComponent(id)}`,{method:'PATCH',headers:{'Prefer':'return=representation'},body:JSON.stringify(payload)});const data=await res.json().catch(()=>[]);if(!res.ok)throw new Error(data.message||'Could not update product.');product=data[0];
-    }else{
-      const res=await authFetch('/rest/v1/products',{method:'POST',headers:{'Prefer':'return=representation'},body:JSON.stringify(payload)});const data=await res.json().catch(()=>[]);if(!res.ok)throw new Error(data.message||'Could not create product.');product=data[0];
-    }
+    if(id){const res=await authFetch(`/rest/v1/products?id=eq.${encodeURIComponent(id)}`,{method:'PATCH',headers:{'Prefer':'return=representation'},body:JSON.stringify(payload)});const data=await res.json().catch(()=>[]);if(!res.ok)throw new Error(data.message||'Could not update product.');product=data[0];}
+    else{const res=await authFetch('/rest/v1/products',{method:'POST',headers:{'Prefer':'return=representation'},body:JSON.stringify(payload)});const data=await res.json().catch(()=>[]);if(!res.ok)throw new Error(data.message||'Could not create product.');product=data[0];}
     for(let i=0;i<pendingFiles.length;i++){
       const file=pendingFiles[i];const safe=`${product.id}-${Date.now()}-${slugify(file.name)||'image'}`;const path=`${product.id}/${safe}`;
       const up=await authFetch(`/storage/v1/object/product-images/${path}`,{method:'POST',headers:{'Content-Type':file.type||'application/octet-stream','x-upsert':'false'},body:file});
@@ -161,12 +203,7 @@ async function saveProduct(e){
   }catch(e){setStatus(e.message);}
 }
 
-$('loginForm').addEventListener('submit',async e=>{
-  e.preventDefault();
-  setStatus('Signing in...','loginStatus');
-  try{await signIn($('loginEmail').value.trim(),$('loginPassword').value);setStatus('','loginStatus');showApp();await loadProducts();}
-  catch(error){setStatus(error.message,'loginStatus');}
-});
+$('loginForm').addEventListener('submit',async e=>{e.preventDefault();setStatus('Signing in...','loginStatus');try{await signIn($('loginEmail').value.trim(),$('loginPassword').value);setStatus('','loginStatus');showApp();await loadProducts();}catch(error){setStatus(error.message,'loginStatus');}});
 $('signOutBtn').addEventListener('click',signOut);
 $('newProductBtn').addEventListener('click',()=>openModal());$('closeModal').addEventListener('click',closeModal);$('cancelModal').addEventListener('click',closeModal);$('productForm').addEventListener('submit',saveProduct);
 $('imageFiles').addEventListener('change',e=>{pendingFiles.push(...Array.from(e.target.files||[]));e.target.value='';renderImages();});
