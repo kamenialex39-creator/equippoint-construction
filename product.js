@@ -64,7 +64,13 @@ function renderGallery(p){
 }
 function renderProduct(p){
  document.title=`${p.name} | EquipPoint Construction`;
- document.getElementById("metaDescription").content=`${p.name} — ${p.cat}. View product details, pricing and request a quotation from EquipPoint Construction.`;
+ const canonical=`https://equippoint-construction.vercel.app/product.html?id=${encodeURIComponent(p.id)}`;
+ const desc=(p.description||p.shortDescription||`${p.name} from EquipPoint Construction.`).slice(0,500);
+ document.getElementById("metaDescription").content=desc;
+ const canonicalLink=document.getElementById("canonicalLink"); if(canonicalLink) canonicalLink.href=canonical;
+ const ogTitle=document.getElementById("ogTitle"); if(ogTitle) ogTitle.content=`${p.name} | EquipPoint Construction`;
+ const ogDescription=document.getElementById("ogDescription"); if(ogDescription) ogDescription.content=desc;
+ const ogUrl=document.getElementById("ogUrl"); if(ogUrl) ogUrl.content=canonical;
  document.getElementById("pageTitle").textContent=`${p.name} | EquipPoint Construction`;
  document.getElementById("crumbName").textContent=p.name;
  document.getElementById("productTag").textContent=p.tag||"SUPPLY";
@@ -72,6 +78,14 @@ function renderProduct(p){
  document.getElementById("productCategory").textContent=p.cat;
  document.getElementById("productName").textContent=p.name;
  document.getElementById("productPrice").textContent=money(p.price);
+ const sd={"@context":"https://schema.org","@type":"Product","name":p.name,"description":desc,"url":canonical,"image":(p.images||[]).map(x=>x.src).filter(Boolean)};
+ if(!sd.image.length) sd.image=[`${location.origin}/assets/products/${slug(p.name)}.svg`];
+ sd.offers={"@type":"Offer","url":canonical,"priceCurrency":"ZAR","price":Number(p.price||0).toFixed(2),"availability":/out/i.test(p.availability||"")?"https://schema.org/OutOfStock":"https://schema.org/InStock","seller":{"@type":"Organization","name":"EquipPoint Construction"}};
+ const rawProduct=products.find(x=>x.id===p.id);
+ if(rawProduct?.brand) sd.brand={"@type":"Brand","name":rawProduct.brand};
+ if(rawProduct?.mpn) sd.mpn=rawProduct.mpn;
+ if(rawProduct?.gtin) sd.gtin13=rawProduct.gtin;
+ const sdEl=document.getElementById("productStructuredData"); if(sdEl) sdEl.textContent=JSON.stringify(sd);
  document.getElementById("productDescription").textContent=p.description||p.shortDescription||"";
  document.getElementById("availability").textContent=p.availability||"Enquire for availability";
  document.getElementById("specs").innerHTML=(p.specs||[]).map((s,i)=>`<div class="spec-row"><span>${String(i+1).padStart(2,"0")}</span><strong>${s}</strong></div>`).join("");
